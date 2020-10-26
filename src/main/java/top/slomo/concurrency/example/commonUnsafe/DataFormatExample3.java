@@ -6,7 +6,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import top.slomo.concurrency.annotations.ThreadSafe;
 
-import java.text.SimpleDateFormat;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,7 +18,7 @@ public class DataFormatExample3 {
     private final static int clientTotal = 5000;
 
 
-    private static DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
+    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyyMMdd");
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -34,7 +33,7 @@ public class DataFormatExample3 {
                     update(count);
                     semaphore.release();
                 }catch (Exception e) {
-                    log.info("exception: {}", e);
+                    log.error("exception: ", e);
                 }
                 countDownLatch.countDown();
             });
